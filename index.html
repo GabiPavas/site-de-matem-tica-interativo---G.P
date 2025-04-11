@@ -8,10 +8,13 @@
 <body>
     <div class="container">
         <h1>Jogo de Matemática</h1>
+
+        <!-- Botões para escolher o modo -->
         <button onclick="iniciarJogo('basico')">Modo Básico</button>
         <button onclick="iniciarJogo('desafio')">Modo Desafio</button>
 
-        <div id="area-jogo" style="display:none;">
+        <!-- Área do jogo que aparece depois de escolher o modo -->
+        <div id="area-jogo" style="display: none;">
             <p id="pergunta"></p>
             <input type="number" id="resposta" />
             <button onclick="verificarResposta()">Verificar</button>
