@@ -1,63 +1,48 @@
 // Variáveis principais do jogo
 let respostaCorreta;
-let pontuacao = 0;
-let modoAtual = "basico";
+let pontuacao = 0; 
+let modoAtual ='basico';
 
 // Função que inicia o jogo com o modo escolhido
-function iniciarJogo(modo) {
-    modoAtual = modo;
-    document.getElementById("area-jogo").style.display = "block";
-    novaPergunta();
-}
+ function iniciarJogo (modo){
+  modoAtual = modo;
+document.getElementById("area-jogo").style.display = "block";
+novaPergunta();
+ }
 
-// Função que gera nova pergunta e mostra na tela
+// Função que gera nova pergunta e nostra na tela 
 function novaPergunta() {
-    const numeros = gerarNumeros(modoAtual);
-    const operacao = escolherOperacao();
-    const perguntaTexto = `${numeros.num1} ${operacao} ${numeros.num2}`;
-    
-    respostaCorreta = calcularResposta(numeros.num1, numeros.num2, operacao);
+const numeros =gerartlumeros(modoAtual);
+const operacao =escolherOperacao();
+const perguntaTexto = '${numeros.numl} ${operacao} ${numeros.num2}';
 
-    document.getElementById("pergunta").innerText = perguntaTexto;
-    document.getElementById("resposta").value = "";
-    document.getElementById("resultado").innerText = "";
+respostaCorreta = calcularResposta(numeros.numl, numeros.num2, operacao);
+
+document-getElementById("pergunta").innerText = perguntaTexto;
+document-getElementById("resposta").value = "";
+document.getElementById("resultado").innerText = "";
 }
+// Gera números aleatórios, maiores no modo desafio 
+function gerarNumeros (modo){
+ let numl = Math. floor (Math.random() * 10) + 1; 
+ let num2 = Math.floor (Math.random() *10) + 1;
 
-// Gerar números aleatórios, maiores no modo desafio
-function gerarNumeros(modo) {
-    let num1 = Math.floor(Math.random() * 10) + 1;
-    let num2 = Math.floor(Math.random() * 10) + 1;
-
-    if (modo === "desafio") {
-        num1 *= 3;
-        num2 *= 3;
-    }
-
-    return { num1, num2 };
+if (modo === 'desafio') {
+numi *= 2;
+num2 *= 3;
 }
-
+return { numl, num2 };
+}
 // Escolhe aleatoriamente uma operação: +, - ou *
 function escolherOperacao() {
-    const operacoes = ["+", "-", "*"];
-    return operacoes[Math.floor(Math.random() * operacoes.length)];
+    const operacoes = ["+","-","*"];
 }
-
 // Calcula o resultado com base nos números e operação
-function calcularResposta(num1, num2, operacao) {
-    if (operacao === "+") return num1 + num2;
-    if (operacao === "-") return num1 - num2;
-    if (operacao === "*") return num1 * num2;
+function calcularResposta(nl, n2, op) {
+switch (op){
+     case "+": return n1 + n2;
+     case "-": return nl - n2; 
+     case "*": return n1 * n2;
 }
-function verificarResposta() {
-    const respostaUsuario = parseInt(document.getElementById("resposta").value);
-
-    if (respostaUsuario === respostaCorreta) {
-        document.getElementById("resultado").innerText = "✅ Resposta Correta!";
-        pontuacao += 10;
-    } else {
-        document.getElementById("resultado").innerText = `❌ Errado! A resposta era ${respostaCorreta}`;
-        pontuacao -= 5;
-    }
-
-    document.getElementById("pontuacao").innerText = pontuacao;
 }
+// Verifica se a resposta do usuário está correta
