@@ -1,24 +1,63 @@
-let num1, num2;
+// Variáveis principais do jogo
+let respostaCorreta;
+let pontuacao = 0;
+let modoAtual = "basico";
 
-function generateQuestion() {
-    num1 = Math.floor(Math.random() * 10);
-    num2 = Math.floor(Math.random() * 10);
-    document.getElementById("question").textContent = `${num1} + ${num2}`;
-    document.getElementById("answer").value = "";
-    document.getElementById("result").textContent = "";
+// Função que inicia o jogo com o modo escolhido
+function iniciarJogo(modo) {
+    modoAtual = modo;
+    document.getElementById("area-jogo").style.display = "block";
+    novaPergunta();
 }
 
-function checkAnswer() {
-    let userAnswer = parseInt(document.getElementById("answer").value);
-    let correctAnswer = num1 + num2;
+// Função que gera nova pergunta e mostra na tela
+function novaPergunta() {
+    const numeros = gerarNumeros(modoAtual);
+    const operacao = escolherOperacao();
+    const perguntaTexto = `${numeros.num1} ${operacao} ${numeros.num2}`;
+    
+    respostaCorreta = calcularResposta(numeros.num1, numeros.num2, operacao);
 
-    if (userAnswer === correctAnswer) {
-        document.getElementById("result").textContent = "Resposta correta!";
-    } else {
-        document.getElementById("result").textContent = `Errado! A resposta certa é ${correctAnswer}`;
+    document.getElementById("pergunta").innerText = perguntaTexto;
+    document.getElementById("resposta").value = "";
+    document.getElementById("resultado").innerText = "";
+}
+
+// Gerar números aleatórios, maiores no modo desafio
+function gerarNumeros(modo) {
+    let num1 = Math.floor(Math.random() * 10) + 1;
+    let num2 = Math.floor(Math.random() * 10) + 1;
+
+    if (modo === "desafio") {
+        num1 *= 3;
+        num2 *= 3;
     }
 
-    setTimeout(generateQuestion, 2000);
+    return { num1, num2 };
 }
 
-generateQuestion();
+// Escolhe aleatoriamente uma operação: +, - ou *
+function escolherOperacao() {
+    const operacoes = ["+", "-", "*"];
+    return operacoes[Math.floor(Math.random() * operacoes.length)];
+}
+
+// Calcula o resultado com base nos números e operação
+function calcularResposta(num1, num2, operacao) {
+    if (operacao === "+") return num1 + num2;
+    if (operacao === "-") return num1 - num2;
+    if (operacao === "*") return num1 * num2;
+}
+function verificarResposta() {
+    const respostaUsuario = parseInt(document.getElementById("resposta").value);
+
+    if (respostaUsuario === respostaCorreta) {
+        document.getElementById("resultado").innerText = "✅ Resposta Correta!";
+        pontuacao += 10;
+    } else {
+        document.getElementById("resultado").innerText = `❌ Errado! A resposta era ${respostaCorreta}`;
+        pontuacao -= 5;
+    }
+
+    document.getElementById("pontuacao").innerText = pontuacao;
+}
