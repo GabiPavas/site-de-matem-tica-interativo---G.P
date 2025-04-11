@@ -18,8 +18,8 @@ const perguntaTexto = '${numeros.numl} ${operacao} ${numeros.num2}';
 
 respostaCorreta = calcularResposta(numeros.numl, numeros.num2, operacao);
 
-document-getElementById("pergunta").innerText = perguntaTexto;
-document-getElementById("resposta").value = "";
+document-getElementById("pergunta").innerText - perguntaTexto;
+document-getElementById("resposta").value - "";
 document.getElementById("resultado").innerText = "";
 }
 // Gera números aleatórios, maiores no modo desafio 
