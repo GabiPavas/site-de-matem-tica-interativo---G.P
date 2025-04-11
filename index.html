@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <title>Jogo de Matemática</title>
@@ -8,11 +8,18 @@
 <body>
     <div class="container">
         <h1>Jogo de Matemática</h1>
-        <p>Quanto é: <span id="question"></span></p>
-        <input type="number" id="answer" placeholder="Digite sua resposta">
-        <button onclick="checkAnswer()">Responder</button>
-        <p id="result"></p>
+        <button onclick="iniciarJogo('basico')">Modo Básico</button>
+        <button onclick="iniciarJogo('desafio')">Modo Desafio</button>
+
+        <div id="area-jogo" style="display:none;">
+            <p id="pergunta"></p>
+            <input type="number" id="resposta" />
+            <button onclick="verificarResposta()">Verificar</button>
+            <p id="resultado"></p>
+            <p>Pontuação: <span id="pontuacao">0</span></p>
+        </div>
     </div>
-    <script src="js/game.js"></script>
+
+    <script src="script.js"></script>
 </body>
 </html>
